@@ -1,0 +1,4 @@
+<launch>
+    <node pkg="state_indicator" name="emergency_display" type="emergency_display.py"/>
+    <node pkg="state_indicator" name="velocity_display" type="velocity_display.py"/>
+</launch>
