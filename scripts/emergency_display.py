@@ -5,6 +5,7 @@ from sensor_msgs.msg import Image
 from cv_bridge import CvBridge
 from std_msgs.msg import Int8
 import cv2
+import getpass
 
 def process_image(msg):
     try:
@@ -12,16 +13,16 @@ def process_image(msg):
         dt_now = datetime.datetime.now()
         if msg.data==0:
             if dt_now.second%2==0:
-                img = cv2.imread("img/04.png", -1)
+                img = cv2.imread("/home/"+getpass.getuser()+"/catkin_ws/src/state_indicator/scripts/img/04.png", -1)
             else:
-                img = cv2.imread("img/02.png", -1)
+                img = cv2.imread("/home/"+getpass.getuser()+"/catkin_ws/src/state_indicator/scripts/img/02.png", -1)
         elif msg.data<4:
-            img = cv2.imread("img/01.png", -1)
+            img = cv2.imread("/home/"+getpass.getuser()+"/catkin_ws/src/state_indicator/scripts/img/01.png", -1)
         else:
             if dt_now.microsecond>500000:
-                img = cv2.imread("img/03.png", -1)
+                img = cv2.imread("/home/"+getpass.getuser()+"/catkin_ws/src/state_indicator/scripts/img/03.png", -1)
             else:
-                img = cv2.imread("img/02.png", -1)
+                img = cv2.imread("/home/"+getpass.getuser()+"/catkin_ws/src/state_indicator/scripts/img/02.png", -1)
         imgMsg = bridge.cv2_to_imgmsg(img, "bgra8")
         pub = rospy.Publisher('state_img', Image, queue_size=10)
         pub.publish(imgMsg)
