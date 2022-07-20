@@ -10,7 +10,7 @@ int main(int argc, char** argv)
 {
   ros::init(argc, argv, "info_overlay_text_publisher");
   ros::NodeHandle nh;
-  ros::Rate loop_rate(2);
+  ros::Rate loop_rate(15);
   ros::Subscriber sub = nh.subscribe("logger", 1000, chatterCallback);
   text.text = "logger started";
   ros::Publisher text_pub = nh.advertise<jsk_rviz_plugins::OverlayText>("text", 1);
